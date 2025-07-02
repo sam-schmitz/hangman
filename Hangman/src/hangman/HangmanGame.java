@@ -1,6 +1,7 @@
 package hangman;
 
 import java.util.Scanner;
+import java.util.*;
 
 public class HangmanGame {
 
@@ -13,14 +14,22 @@ public class HangmanGame {
 			guessedWord[i] = '_';
 		}
 		
+		List<Character> wrongGuesses = new ArrayList<>();
+		
 		int attempts = 6;
 		Scanner scanner = new Scanner(System.in);
 		
 		while (attempts > 0 && new String(guessedWord).contains("_")) {
 			System.out.println("Word: " + String.valueOf(guessedWord));
+			System.out.println("Letters guessed: " + String.valueOf(wrongGuesses));
 			System.out.println("Attempts left: " + attempts);
 			System.out.println("Guess a letter: ");
 			char guess = scanner.nextLine().toLowerCase().charAt(0);
+			
+			if (wrongGuesses.contains(guess) || new String(guessedWord).indexOf(guess) >= 0) {
+                System.out.println("You already guessed that letter.");
+                continue;
+            }
 			
 			boolean correct = false;
 			for (int i = 0; i < secretWord.length(); i++) {
@@ -32,6 +41,7 @@ public class HangmanGame {
 			
 			if (!correct) {
 				attempts--;
+				wrongGuesses.add(guess);
 				System.out.println("Wrong guess");
 			}
 		}
