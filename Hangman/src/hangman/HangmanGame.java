@@ -6,7 +6,7 @@ import java.util.*;
 public class HangmanGame {
 
 	public static void main(String[] args) { 
-		String[] wordList = {"dog", "cat", "pizza"};
+		String[] wordList = {"dog", "cat", "bird", "pizza", "cheese", "hamburger", "hotdog", "boat"};
 		String secretWord = wordList[(int) (Math.random() * wordList.length)];
 		
 		char[] guessedWord = new char[secretWord.length()];
