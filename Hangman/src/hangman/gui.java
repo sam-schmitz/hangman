@@ -47,6 +47,11 @@ public class gui extends JFrame {
 		String input = guessInput.getText().toLowerCase();
 		guessInput.setText("");
 		
+		if (input.length() == 0) {
+			JOptionPane.showMessageDialog(this, "Please enter a letter. ");
+			return;
+		}
+		
 		if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
 			JOptionPane.showMessageDialog(this, "Please enter a single letter. ");
 			return;
