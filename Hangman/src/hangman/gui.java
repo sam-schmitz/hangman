@@ -10,13 +10,17 @@ public class gui extends JFrame {
 	private final String secretWord = wordList[new Random().nextInt(wordList.length)];
 	private final char[] displayWord = new char[secretWord.length()];
 	private final Set<Character> wrongGuesses = new HashSet<>();
-	private int attemptsLeft = 6;
+	private int wrongGuessCount = 0;
 	
 	private JLabel wordLabel;
 	private JLabel attemptsLabel;
 	private JLabel wrongLabel;
 	private JTextField guessInput;
 	private JButton guessButton;
+	
+	public void setWrongGuessCount(int count) {
+		this.wrongGuessCount = count;
+	}
 	
 	public gui() {
 		Arrays.fill(displayWord, '_');
@@ -27,7 +31,7 @@ public class gui extends JFrame {
 		setLayout(new GridLayout(5, 1));
 		
 		wordLabel = new JLabel("Word: " + String.valueOf(displayWord), SwingConstants.CENTER);
-		attemptsLabel = new JLabel("Attempts left: " + attemptsLeft, SwingConstants.CENTER);
+		attemptsLabel = new JLabel("Attempts left: " + (6 - wrongGuessCount), SwingConstants.CENTER);
 		wrongLabel = new JLabel("Wrong guesses: ", SwingConstants.CENTER);
 		guessInput = new JTextField();
 		guessButton = new JButton("Guess");
@@ -75,7 +79,7 @@ public class gui extends JFrame {
 		
 		if (!correct) {
 			wrongGuesses.add(guess);
-			attemptsLeft--;
+			setWrongGuessCount(wrongGuessCount + 1);
 		}
 		
 		updateDisplay();
@@ -83,7 +87,7 @@ public class gui extends JFrame {
 		if (new String(displayWord).equals(secretWord)) {
 			JOptionPane.showMessageDialog(this, "You won! The word was: " + secretWord);
 			guessButton.setEnabled(false);
-		} else if (attemptsLeft == 0) {
+		} else if (wrongGuessCount == 6) {
 			JOptionPane.showMessageDialog(this, "Game over! The word was: " + secretWord);
 			guessButton.setEnabled(false);
 		}
@@ -96,7 +100,7 @@ public class gui extends JFrame {
 			spacedWord.append(c).append(' ');
 		}
 		wordLabel.setText("Word: " + spacedWord.toString().trim());
-		attemptsLabel.setText("Attempts left: " + attemptsLeft);
+		attemptsLabel.setText("Attempts left: " + (6 - wrongGuessCount));
 		wrongLabel.setText("Wrong guesses: " + wrongGuesses.toString());
 	}
 	
