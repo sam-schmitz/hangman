@@ -28,30 +28,43 @@ public class gui extends JFrame {
 	public gui() {
 		Arrays.fill(displayWord, '_');
 		
-		setTitle("Hangman Game");
-		setSize(500, 300);
+		setTitle("Hangman Game");		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
 		canvas = new HangmanCanvas();
-		canvas.setPreferredSize(new Dimension(300, 300));		
-		add(canvas, BorderLayout.CENTER);		
+		canvas.setPreferredSize(new Dimension(250, 250));		
+		add(canvas, BorderLayout.CENTER);	
+		
+		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new GridLayout(4, 1));		
 		
 		wordLabel = new JLabel("Word: " + String.valueOf(displayWord), SwingConstants.CENTER);
 		attemptsLabel = new JLabel("Attempts left: " + (6 - wrongGuessCount), SwingConstants.CENTER);
 		wrongLabel = new JLabel("Wrong guesses: ", SwingConstants.CENTER);
+		
+		controlPanel.add(wordLabel);
+		controlPanel.add(attemptsLabel);
+		controlPanel.add(wrongLabel);	
+		
+		JPanel guessPanel = new JPanel(new BorderLayout());		
+		
 		guessInput = new JTextField();
 		guessButton = new JButton("Guess");
 		
 		guessButton.addActionListener(e -> handleGuess());
 		guessInput.addActionListener(e -> handleGuess());
-				
-		add(wordLabel);
-		add(attemptsLabel);
-		add(wrongLabel);
-		add(guessInput);
-		add(guessButton);		
 		
+		guessPanel.add(guessInput, BorderLayout.CENTER);
+		guessPanel.add(guessButton, BorderLayout.EAST);
+		
+		controlPanel.add(guessPanel);
+		
+		controlPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		
+		add(controlPanel, BorderLayout.SOUTH);		
+		
+		pack();
 		setVisible(true);
 		updateDisplay();
 	}
