@@ -42,6 +42,7 @@ public class gui extends JFrame {
 		add(guessButton);
 		
 		setVisible(true);
+		updateDisplay();
 	}
 	
 	private void handleGuess() {
@@ -89,7 +90,12 @@ public class gui extends JFrame {
 	}
 	
 	private void updateDisplay() {
-		wordLabel.setText("Word: " + String.valueOf(displayWord));
+		StringBuilder spacedWord = new StringBuilder();
+		
+		for (char c : displayWord) {
+			spacedWord.append(c).append(' ');
+		}
+		wordLabel.setText("Word: " + spacedWord.toString().trim());
 		attemptsLabel.setText("Attempts left: " + attemptsLeft);
 		wrongLabel.setText("Wrong guesses: " + wrongGuesses.toString());
 	}
