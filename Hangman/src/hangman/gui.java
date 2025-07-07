@@ -5,7 +5,24 @@ import java.awt.*;
 import java.util.*;
 
 public class gui extends JFrame {
-	private final String[] wordList =  {"dog", "cat", "bird", "pizza", "cheese", "hamburger", "hotdog", "boat"};
+	private final String[] wordList =  {
+			"lynx", "sync", "fly", 
+			"gym", "fuzz", "quest",
+			"zap", "query", "byte",
+			"dog", "cat", "eat",
+			"happy", "sad", "angry",
+			"pizza", "cheese", "hotdog",
+			"goat", "cow", "chicken",
+			"mammal", "reptile", "insect",
+			"dinosaur", "fish", "rodent",
+			"basketball", "football", "soccer",
+			"hangman", "man", "word",
+			"plant", "water", "earth", 
+			"shark", "ocean", "whale",
+			"sky", "bird", "cloud",
+			"apple", "beach", "chair",
+			"drink", "house", "train"
+			};
 	private final String secretWord = wordList[new Random().nextInt(wordList.length)];
 	private final char[] displayWord = new char[secretWord.length()];
 	private final Set<Character> wrongGuesses = new HashSet<>();
