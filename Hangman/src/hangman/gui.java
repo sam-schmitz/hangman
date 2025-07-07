@@ -2,7 +2,6 @@ package hangman;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.event.*;
 import java.util.*;
 
 public class gui extends JFrame {
@@ -18,17 +17,25 @@ public class gui extends JFrame {
 	private JTextField guessInput;
 	private JButton guessButton;
 	
+	private HangmanCanvas canvas;
+	
 	public void setWrongGuessCount(int count) {
-		this.wrongGuessCount = count;
+		this.wrongGuessCount = count;	
+		canvas.setWrongGuessCount(count);
 	}
+		
 	
 	public gui() {
 		Arrays.fill(displayWord, '_');
 		
 		setTitle("Hangman Game");
-		setSize(400, 250);
+		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(5, 1));
+		setLayout(new BorderLayout());
+		
+		canvas = new HangmanCanvas();
+		canvas.setPreferredSize(new Dimension(300, 300));		
+		add(canvas, BorderLayout.CENTER);		
 		
 		wordLabel = new JLabel("Word: " + String.valueOf(displayWord), SwingConstants.CENTER);
 		attemptsLabel = new JLabel("Attempts left: " + (6 - wrongGuessCount), SwingConstants.CENTER);
@@ -38,12 +45,12 @@ public class gui extends JFrame {
 		
 		guessButton.addActionListener(e -> handleGuess());
 		guessInput.addActionListener(e -> handleGuess());
-		
+				
 		add(wordLabel);
 		add(attemptsLabel);
 		add(wrongLabel);
 		add(guessInput);
-		add(guessButton);
+		add(guessButton);		
 		
 		setVisible(true);
 		updateDisplay();
