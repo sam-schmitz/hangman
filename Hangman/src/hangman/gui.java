@@ -33,6 +33,7 @@ public class gui extends JFrame {
 		guessButton = new JButton("Guess");
 		
 		guessButton.addActionListener(e -> handleGuess());
+		guessInput.addActionListener(e -> handleGuess());
 		
 		add(wordLabel);
 		add(attemptsLabel);
